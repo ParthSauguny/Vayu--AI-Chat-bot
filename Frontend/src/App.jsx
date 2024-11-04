@@ -24,9 +24,11 @@ function App() {
       return;
     }
     try {
-      console.log("starting");
-      await axios.post("http://localhost:5000/gemini" , {ques , chatHistory});
-      console.log("level 1");
+      //console.log("starting");
+      const response = await axios.post("http://localhost:5000/gemini" , {ques , chatHistory});
+      console.log("ans: " , response.data);
+      setChatHistory(oldHistory => [...oldHistory , response.data]);
+      //console.log("level 1");
     } catch (error) {
       console.log(error);
       setError("Something went wrong! Please try again later");
