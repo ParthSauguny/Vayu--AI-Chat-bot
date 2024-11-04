@@ -27,7 +27,19 @@ function App() {
       //console.log("starting");
       const response = await axios.post("http://localhost:5000/gemini" , {ques , chatHistory});
       console.log("ans: " , response.data);
-      setChatHistory(oldHistory => [...oldHistory , response.data]);
+      setChatHistory(oldHistory => [
+        ...oldHistory,
+        {
+          role: 'user',
+          parts: [ques]  // Ensuring 'ques' is an array
+        },
+        {
+          role: 'Vayu',
+          parts: [response.data]  // Ensuring 'response.data' is an array
+        }
+      ]);
+      
+      setQues("");
       //console.log("level 1");
     } catch (error) {
       console.log(error);
@@ -72,8 +84,8 @@ function App() {
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
       <div className='bg-white w-full rounded-lg p-4 shadow-inner overflow-y-auto max-h-40'>
-        {chatHistory.map((question, index) => (
-          <p key={index} className="text-gray-700 mb-1">{question}</p>
+        {chatHistory.map((chatItem, index) => (
+          <p key={index} className="text-gray-700 mb-1">{chatItem.role} : {chatItem.parts}</p>
         ))}
       </div>
     </div>
