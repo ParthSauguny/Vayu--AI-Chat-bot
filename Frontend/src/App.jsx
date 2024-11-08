@@ -83,9 +83,9 @@ function App() {
 
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-      <div className='bg-white w-full rounded-lg p-4 shadow-inner overflow-y-auto max-h-40'>
+      <div className='bg-slate-100 w-full rounded-lg p-4 shadow-inner overflow-y-auto max-h-40 border'>
         {chatHistory.map((chatItem, index) => (
-          <p key={index} className="text-gray-700 mb-1">{chatItem.role} : {chatItem.parts}</p>
+          <p key={index} className=" text-xl mb-1 border-gray-500 border-b-8">{chatItem.role} : {chatItem.parts}</p>
         ))}
       </div>
     </div>
